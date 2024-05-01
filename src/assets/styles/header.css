@@ -1,5 +1,10 @@
 /*--  Header  --*/
 
+header {
+    padding: 16px 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
 header .wrapper {
     display: flex;
     align-items: center;

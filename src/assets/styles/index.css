@@ -49,3 +49,11 @@ img {
     display: block;
     width: auto;
 }
+
+p {
+    margin: 0;
+}
+
+p:not(:last-child) {
+    margin-bottom: 16px;
+}
