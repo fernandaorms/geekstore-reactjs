@@ -1,5 +1,6 @@
 export const fields = [
     { 
+        'api': 'first_name',
         'label': [
             {
                 'value': 'Nome',
@@ -15,6 +16,7 @@ export const fields = [
         ]
     },
     { 
+        'api': 'last_name',
         'label': [
             {
                 'value': 'Sobrenome',
@@ -30,6 +32,7 @@ export const fields = [
         ]
     },
     { 
+        'api': 'cpf',
         'label': [
             {
                 'value': 'CPF',
@@ -45,6 +48,7 @@ export const fields = [
         ]
     },
     { 
+        'api': 'phone',
         'label': [
             {
                 'value': 'Telefone',
@@ -60,6 +64,7 @@ export const fields = [
         ]
     },
     { 
+        'api': 'email',
         'label': [
             {
                 'value': 'Email',
@@ -75,6 +80,7 @@ export const fields = [
         ]
     },
     { 
+        'api': 'address',
         'label': [
             {
                 'value': 'Endereço',
@@ -90,6 +96,7 @@ export const fields = [
         ]
     },
     { 
+        'api': 'password',
         'label': [
             {
                 'value': 'Senha',
