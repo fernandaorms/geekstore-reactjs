@@ -73,7 +73,7 @@ export const fields = [
         'field': [
             {
                 'element': 'input',
-                'type': 'text',
+                'type': 'email',
                 'id': 'clientEmail',
                 'placeholder': '',
             }
@@ -105,7 +105,7 @@ export const fields = [
         'field': [
             {
                 'element': 'input',
-                'type': 'text',
+                'type': 'password',
                 'id': 'clientPassword',
                 'placeholder': '',
             }
@@ -120,7 +120,7 @@ export const fields = [
         'field': [
             {
                 'element': 'input',
-                'type': 'text',
+                'type': 'password',
                 'id': 'clientPasswordConfirm',
                 'placeholder': '',
             }

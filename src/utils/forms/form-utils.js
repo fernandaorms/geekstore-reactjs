@@ -10,12 +10,7 @@ export const isEmpty = (value) => {
 };
 
 
-export const clearFormResults = (setFormSuccess, setFormError) => {
-    setFormSuccess(false);
-    setFormError(false);
-}
-
-
+/*  */
 export const getRequestBody = (formState, fields) => {
     const requestBody = {};
 
@@ -29,22 +24,11 @@ export const getRequestBody = (formState, fields) => {
 }
 
 
-export const validateForm = (formState, fields) => {
-    const errors = {};
-
-    fields.forEach((field) => {
-        const fieldId = field.field[0].id;
-
-        if(isEmpty(formState[fieldId])) {
-            if (!errors[fieldId]) errors[fieldId] = []; 
-
-            errors[fieldId].push('Este campo não pode estar vazio.');
-        }
-    });
-
-    return errors;
+/*  Clear  */
+export const clearFormResults = (setFormSuccess, setFormError) => {
+    setFormSuccess(false);
+    setFormError(false);
 }
-
 
 export const clearFormValues = (setFormState, fields) => {
     const clearedFormState = {};
@@ -56,3 +40,36 @@ export const clearFormValues = (setFormState, fields) => {
 
     setFormState(clearedFormState);
 };
+
+
+/*  Validate  */
+function validateEmail(email) {
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+    return reg.test(email);
+}
+
+export const validateForm = (formState, fields) => {
+    const errors = {};
+
+    fields.forEach((field) => {
+        const fieldId = field.field[0].id;
+
+        const fieldType = field.field[0].type;
+
+        if(isEmpty(formState[fieldId])) {
+            if (!errors[fieldId]) errors[fieldId] = []; 
+
+            errors[fieldId].push('Este campo não pode estar vazio.');
+        }
+
+        if(fieldType === 'email' && !validateEmail(formState[fieldId])) {
+            if (!errors[fieldId]) errors[fieldId] = []; 
+
+            errors[fieldId].push('Formato de e-mail inválido.');
+        }
+
+    });
+
+    return errors;
+}
