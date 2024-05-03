@@ -1,0 +1,22 @@
+/*--  Form  --*/
+
+.form {
+    margin: 32px 0;
+}
+
+form > .row {
+    gap: 12px 0;
+}
+
+form > .buttons {
+    margin-top: 24px;
+}
+
+span.error {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+span.error > * {
+    display: block;
+}

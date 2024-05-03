@@ -1,18 +1,19 @@
+import '../../assets/styles/form.css'
 import { useState } from 'react';
-import axios from 'axios';
 
 import api from '../../services/api';
 
-import { FormLabel } from './FormLabel';
 import { FormField } from './FormField';
 
-export const Form = ( { form_id, fields } ) => {
+import { clearFormResults, getRequestBody, validateForm, clearFormValues } from '../../utils/forms/form-utils';
+
+export const Form = ( { formConfig } ) => {
     const [formState, setFormState] = useState({});
 
-    const [formSuccess, setFormSuccess] = useState('');
-    const [formError, setFormError] = useState('');
+    const [formSuccess, setFormSuccess] = useState(false);
+    const [formError, setFormError] = useState(false);
 
-    const [user, setUser] = useState();
+    const [formFieldsErrors, setFormFieldsErrors] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -23,51 +24,49 @@ export const Form = ( { form_id, fields } ) => {
         }));
     };
 
-    const handleSubmit = async (e, fields) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
+
+        clearFormResults(setFormSuccess, setFormError);
         
-        const request_body = {};
-        
-        fields.map((field) => {
-            if(field.api) {
-                request_body[field.api] = formState[field.field[0].id];
-            }
-        });
+        const formValidationErrors = validateForm(formState, formConfig.fields);
 
-        try {
-            const response = await api.post('/client', request_body);
+        setFormFieldsErrors(formValidationErrors);
 
-            setUser(response.response);
-
-            console.log(user);
-
-        } catch (err) {
-            console.error('Error', err);
-        }    
+        if(Object.keys(formValidationErrors).length === 0) {
+            const request_body = getRequestBody(formState, formConfig.fields);
+            
+            return api.post(formConfig.apiUrl, request_body)
+                .then(response => {
+                    setFormSuccess(true);
+                    clearFormValues(setFormState, formConfig.fields);
+                })
+                .catch(err => {
+                    console.error('Error', err);
+                    setFormError(true);
+                });
+        }
     }
-
     
     return (
         <div className='form'>
-            <form id={form_id} onSubmit={(e) => handleSubmit(e, fields)}>
+            { (formSuccess || formError) && (
+                <div className='results'>
+                    {formSuccess && ( <div className='alert alert-success' role='alert'>{formConfig.successMessage}</div> )}
+                    
+                    {formError && ( <div className='alert alert-danger' role='alert'>{formConfig.errorMessage}</div> )}
+                </div>
+            )}
+
+            <form id={formConfig.formId} onSubmit={(e) => handleSubmit(e)}>
                 <div className='row'>
-                    {fields.map((field) => (
-                        <div className='col-lg-6 field' key={field.field[0].id}>
-                            {field.label && field.label.map(label => (
-                                <FormLabel key={label.value} label={label.value} fieldId={field.field[0].id} />
-                            ))}
-
-                            {field.field && field.field.map(input => (
-                                <FormField key={input.id} input={input} formState={formState} handleChange={handleChange} />
-                            ))}
-
-                            <span className='error'></span>
-                        </div>
+                    {formConfig.fields.map((field) => (
+                        <FormField field={field} formState={formState} formFieldsErrors={formFieldsErrors} handleChange={handleChange} key={field.field[0].id} />
                     ))}
                 </div>
 
                 <div className='buttons'>
-                    <button type='submit' className='btn btn-success'>Cadastrar</button>
+                    <button type='submit' className='btn btn-success'>{formConfig.submitButtonLabel}</button>
                 </div>
             </form>
         </div>
