@@ -1,7 +1,11 @@
 export const SignIn = () => {
     return (
-        <div>
-            <h1>Login</h1>
-        </div>
+        <section className='main'>
+            <div className='container'>
+                <div className='intro'>
+                    <h1>Login</h1>
+                </div>
+            </div>
+        </section>
     );
 };

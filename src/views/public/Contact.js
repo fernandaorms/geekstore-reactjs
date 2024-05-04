@@ -1,7 +1,11 @@
 export const Contact = () => {
     return (
-        <div>
-            <h1>Contato</h1>
-        </div>
+        <section className='main'>
+            <div className='container'>
+                <div className='intro'>
+                    <h1>Contato</h1>
+                </div>
+            </div>
+        </section>
     );
 };

@@ -1,7 +1,11 @@
 export const About = () => {
     return (
-        <div>
-            <h1>Sobre</h1>
-        </div>
+        <section className='main'>
+            <div className='container'>
+                <div className='intro'>
+                    <h1>Sobre</h1>
+                </div>
+            </div>
+        </section>
     );
 };
