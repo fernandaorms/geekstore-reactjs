@@ -25,9 +25,9 @@ main div.sidebar .wrapper {
 
 
 /*  */
-main div.sidebar .logo {
-    font-size: 1.25em;
-    font-weight: 700;
+main div.sidebar .logo img {
+    height: 32px;
+    width: auto;
 }
 
 
