@@ -1,5 +1,7 @@
-import '../../assets/styles/footer.css';
 import { Link } from 'react-router-dom';
+
+import '../../assets/styles/footer.css';
+import logo_colored from '../../assets/images/logo-colored.svg'
 
 export const Footer = () => {
     return (
@@ -7,7 +9,7 @@ export const Footer = () => {
             <div className='container'>
                 <div className='wrapper'>
                     <div className='logo'>
-                        <Link to='/'>Loja Geek</Link>
+                        <Link to='/'><img src={logo_colored} alt='Logo Colored' /></Link>
                     </div>
 
                     <div className='copyright'>

@@ -11,6 +11,11 @@ header .wrapper {
     justify-content: space-between;
 }
 
+header .logo img {
+    height: 28px;
+    width: auto;
+}
+
 header .menu ul {
     gap: 0 32px;
 }

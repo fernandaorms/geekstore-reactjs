@@ -8,6 +8,11 @@ footer .wrapper {
     justify-content: space-between;
 }
 
+footer .logo img {
+    height: 28px;
+    width: auto;
+}
+
 footer .menu ul {
     gap: 0 32px;
 }

@@ -1,5 +1,7 @@
-import '../../assets/styles/header.css';
 import { Link } from 'react-router-dom';
+
+import '../../assets/styles/header.css';
+import logo_colored from '../../assets/images/logo-colored.svg'
 
 export const Header = () => {
     return (
@@ -7,7 +9,7 @@ export const Header = () => {
             <div className='container'>
                 <div className='wrapper'>
                     <div className='logo'>
-                        <Link to='/'>Loja Geek</Link>
+                        <Link to='/'><img src={logo_colored} alt='Logo Colored' /></Link>
                     </div>
 
                     <div className='menu'>
