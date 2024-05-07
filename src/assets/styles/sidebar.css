@@ -1,0 +1,95 @@
+/*--  Sidebar  --*/
+main div.sidebar {
+    padding: 24px 0;
+}
+
+main .row > div.col-lg-3 {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: #FFF;
+    border-radius: 0 16px 16px 0;
+}
+
+main .row > div.col-lg-3 div.container,
+main div.sidebar .wrapper,
+main div.sidebar {
+    height: 100%;
+}
+
+main div.sidebar .wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+}
+
+
+/*  */
+main div.sidebar .logo {
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+
+/*  */
+main div.sidebar .menu {
+    flex: 1;
+    margin: 32px 0;
+}
+
+main div.sidebar .menu ul.nav {
+    display: flex;
+    flex-direction: column;
+}
+
+main div.sidebar .menu li a,
+main div.sidebar .menu li {
+    display: flex;
+    align-items: center;
+    gap: 0 12px;
+}
+
+main div.sidebar .menu li:nth-child(n+2) {
+    margin-top: 24px;
+}
+
+main div.sidebar .menu li span {
+    font-size: 14px;
+}
+
+
+/*  */
+main div.sidebar .user {
+    display: flex;
+    align-items: center;
+    gap: 0 12px;
+    background: #F5F3F5;
+    border-radius: 4px;
+    padding: 12px 8px;
+}
+
+main div.sidebar .user .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+}
+
+main div.sidebar .user .info {
+    color: #808080;
+    font-weight: 600;
+}
+
+main div.sidebar .user .info .email {
+    font-size: 12px;
+}
+
+
+@media screen and (max-width:991px) {
+    main .row > div.col-lg-3 {
+        height: fit-content;
+    }
+}
