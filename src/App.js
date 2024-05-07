@@ -4,6 +4,8 @@ import { PrivateLayout } from './components/layout/PrivateLayout';
 import { PublicLayout } from './components/layout/PublicLayout';
 
 import { Dashboard } from './views/private/Dashboard';
+import { Clients } from './views/private/Clients';
+import { Products } from './views/private/Products';
 
 import { Home } from './views/public/Home';
 import { About } from './views/public/About';
@@ -25,6 +27,8 @@ export const App = () => {
 
                 <Route path='/admin' element={<PrivateLayout />}>
                     <Route path='/admin' element={<Dashboard />}/>
+                    <Route path='/admin/client' element={<Clients />}/>
+                    <Route path='/admin/product' element={<Products />}/>
                 </Route>
             </Routes>
         </BrowserRouter>
