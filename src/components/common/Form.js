@@ -34,9 +34,9 @@ export const Form = ( { formConfig } ) => {
         setFormFieldsErrors(formValidationErrors);
 
         if(Object.keys(formValidationErrors).length === 0) {
-            const request_body = getRequestBody(formState, formConfig.fields);
+            const requestBody = getRequestBody(formState, formConfig.fields);
             
-            return api.post(formConfig.apiUrl, request_body)
+            return api.post(formConfig.apiUrl, requestBody)
                 .then(response => {
                     setFormSuccess(true);
                     clearFormValues(setFormState, formConfig.fields);
