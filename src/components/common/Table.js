@@ -2,8 +2,10 @@ import {useState, useEffect} from 'react';
 
 import api from '../../services/api';
 
+import { Loading } from './Loading';
 import { TableHead } from './TableHead';
 import { TableBody } from './TableBody';
+import { TableResults } from './TableResults';
 
 export const Table = ({ tableConfig }) => {
     const [data, setData] = useState([]);
@@ -27,29 +29,11 @@ export const Table = ({ tableConfig }) => {
         fetchData();
     }, [tableConfig.apiUrl]);
 
-    if (loading) {
-        return (
-            <div className='results'>
-                <div className='alert alert-info' role='alert'>Carregando...</div>
-            </div>
-        );
-    }
+    if (loading) return ( <Loading /> );
 
-    if (error) {
-        return (
-            <div className='results'>
-                <div className='alert alert-danger' role='alert'>{tableConfig.errorMessage}</div>
-            </div>
-        )
-    }
+    if (error) return ( <TableResults type='danger' message={`${error.message} - ${tableConfig.errorMessage}`} /> );
     
-    if (!data.response || data.response.length === 0) {
-        return (
-            <div className='results'>
-                <div className='alert alert-warning' role='alert'>{tableConfig.emptyTableMessage}</div>
-            </div>
-        )
-    }
+    if (!data.response || data.response.length === 0) return ( <TableResults type='warning' message={tableConfig.emptyTableMessage} /> );
 
     return (
         <table className='table' id={tableConfig.tableId}>
