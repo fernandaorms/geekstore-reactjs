@@ -1,5 +1,8 @@
 import { Outlet } from 'react-router-dom';
 
+import '../../assets/styles/main.css';
+import { Sidebar } from '../layout/Sidebar';
+
 export const PrivateLayout = () => {
     return (
         <div>
@@ -7,7 +10,7 @@ export const PrivateLayout = () => {
                 <div className='row'>
                     <div className='col-lg-3'>
                         <div className='container'>
-                            <h2>Sidebar</h2>
+                            <Sidebar />
                         </div>
                     </div>
 
