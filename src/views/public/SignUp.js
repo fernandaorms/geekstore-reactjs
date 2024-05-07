@@ -6,7 +6,7 @@ export const SignUp = () => {
         formId: 'clientRegister',
         apiUrl: '/client',
         successMessage: 'Cadastro realizado com sucesso!',
-        errorMessage: 'Não foi possível realizar o cadastro.',
+        errorMessage: 'Não foi possível realizar o cadastro, estamos trabalhando para resolver o problema. Por favor, tente novamente mais tarde.',
         submitButtonLabel: 'Cadastrar',
         fields: fields
     };
