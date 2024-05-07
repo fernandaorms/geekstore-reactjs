@@ -1,7 +1,7 @@
 import { Table } from '../../components/common/Table';
 import { columns } from '../../utils/tables/table-clients-columns';
 
-export const Clients = () => {
+export const ListClients = () => {
     const tableConfig = {
         tableId: 'clientList',
         apiUrl: '/client',

@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
+
 import { Table } from '../../components/common/Table';
 import { columns } from '../../utils/tables/table-products-columns';
 
-export const Products = () => {
+export const ListProducts = () => {
     const tableConfig = {
         tableId: 'productList',
         apiUrl: '/product',
@@ -20,6 +22,10 @@ export const Products = () => {
             
             <div>
                 <Table tableConfig={tableConfig} />
+            </div>
+
+            <div className='buttons'>
+                <Link to='/admin/product/create'>Novo Produto</Link>
             </div>
         </div>
     );
