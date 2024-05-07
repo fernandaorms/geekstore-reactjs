@@ -8,12 +8,12 @@ export const columns = [
         'value': 'Ícone'
     },
     {
-        'api': 'sku',
-        'value': 'SKU'
+        'api': 'name',
+        'value': 'Nome'
     },
     {
-        'api': 'description',
-        'value': 'Descrição'
+        'api': 'sku',
+        'value': 'SKU'
     },
     {
         'api': 'qty_stock',
