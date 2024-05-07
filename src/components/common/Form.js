@@ -4,15 +4,14 @@ import { useState } from 'react';
 import api from '../../services/api';
 
 import { FormField } from './FormField';
+import { FormResults } from './FormResults';
 
 import { clearFormResults, getRequestBody, validateForm, clearFormValues } from '../../utils/forms/form-utils';
 
 export const Form = ( { formConfig } ) => {
     const [formState, setFormState] = useState({});
-
     const [formSuccess, setFormSuccess] = useState(false);
     const [formError, setFormError] = useState(false);
-
     const [formFieldsErrors, setFormFieldsErrors] = useState({});
 
     const handleChange = (e) => {
@@ -50,13 +49,7 @@ export const Form = ( { formConfig } ) => {
     
     return (
         <div className='form'>
-            { (formSuccess || formError) && (
-                <div className='results'>
-                    {formSuccess && ( <div className='alert alert-success' role='alert'>{formConfig.successMessage}</div> )}
-                    
-                    {formError && ( <div className='alert alert-danger' role='alert'>{formConfig.errorMessage}</div> )}
-                </div>
-            )}
+            { (formSuccess || formError) && ( <FormResults success={formSuccess} error={formError} successMessage={formConfig.successMessage} errorMessage={formConfig.errorMessage} /> )}
 
             <form id={formConfig.formId} onSubmit={(e) => handleSubmit(e)}>
                 <div className='row'>
