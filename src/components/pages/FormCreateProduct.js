@@ -1,3 +1,4 @@
+import '../../assets/styles/form.css';
 import { useState} from 'react';
 import api from '../../services/api';
 import { FormResults } from '../common/FormResults';

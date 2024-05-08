@@ -5,7 +5,7 @@ export const validate = (key, element, formState, type = null, required = true) 
 
     if(required && (element === 'input' || element === 'textarea') && isEmpty(formState[key])) errors[key].push('Este campo não pode estar vazio.');
     
-    if(required && element === 'select' && (isEmpty(formState[key])) || formState[key] === '0') errors[key].push('Selecione uma opção para continuar.');
+    if(required && element === 'select' && ((isEmpty(formState[key])) || formState[key] === '0')) errors[key].push('Selecione uma opção para continuar.');
 
     if(required && type === 'email' && !validateEmail(formState[key])) errors[key].push('Formato de e-mail inválido.');
 
