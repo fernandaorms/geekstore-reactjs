@@ -61,19 +61,19 @@ export const FormCreateProductStep1 = ({ formState, handleChange, validateForm, 
         
                 <select 
                     id='productCategory'
-                    name='category'
+                    name='category_id'
                     className='form-select'
                     onChange={handleChange}
-                    value={formState['category'] || '0'}
+                    value={formState['category_id'] || 0}
                     onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors, 'select');}}
                 >
-                    <option value='0'>Sem Categoria</option>
-                    <option value='1'>Categoria 1</option>
-                    <option value='2'>Categoria 2</option>
-                    <option value='3'>Categoria 3</option>
+                    <option value={0}>Sem Categoria</option>
+                    <option value={1}>Categoria 1</option>
+                    <option value={2}>Categoria 2</option>
+                    <option value={3}>Categoria 3</option>
                 </select>
 
-                {formErrors['category'] && (<FormSpanError errors={formErrors['category']} />)}
+                {formErrors['category_id'] && (<FormSpanError errors={formErrors['category_id']} />)}
             </div>
         </FormStep>
     );
