@@ -10,13 +10,13 @@ export const validate = (key, element, formState, type = null, required = true) 
     if(required && type === 'email' && !validateEmail(formState[key])) errors[key].push('Formato de e-mail inválido.');
 
     if(required && type === 'password') {
-        const passwords = document.querySelectorAll('input[type="password"]');
+        if(!errors['password']) errors['password'] = [];
+        if(!errors['password_confirm']) errors['password_confirm'] = [];
 
-        if (passwords.length === 2 && passwords[0].value !== passwords[1].value) passwords.forEach(password =>{
-            if(!errors[password.name]) errors[password.name] = [];
-
-            errors[password.name].push('As senhas não coincidem.');
-        });
+        if (formState['password'] !== formState['password_confirm']) {
+            errors['password'].push('As senhas não coincidem.');
+            errors['password_confirm'].push('As senhas não coincidem.');
+        };
     }
 
     return errors;
