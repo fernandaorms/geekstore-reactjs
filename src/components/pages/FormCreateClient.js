@@ -6,11 +6,13 @@ import { FormLabel } from '../common/FormLabel';
 import { FormSpanError } from '../common/FormSpanError';
 import { validateForm, validateFormField, clearForm, getRequestBody } from '../../utils/forms/form-validade';
 
-export const FormCreateClient = ({ successMessage, errorMessage }) => {
+export const FormCreateClient = () => {
     const [formState, setFormState] = useState({});
     const [formErrors, setFormErrors] = useState({});
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [submitError, setSubmitError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,6 +26,8 @@ export const FormCreateClient = ({ successMessage, errorMessage }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        setErrorMessage('');
+        setSuccessMessage('');
         setSubmitSuccess(false);
         setSubmitError(false);
 
@@ -35,13 +39,20 @@ export const FormCreateClient = ({ successMessage, errorMessage }) => {
 
         return api.post('/client', requestBody)
             .then(response => {
-                setSubmitSuccess(true);
-                clearForm(e.target, setFormState);
+                if(response.data.status === 200) {
+                    setSubmitSuccess(true);
+                    setSuccessMessage(response.data.response)
+                    clearForm(e.target, setFormState);
+                }
+                else {
+                    setSubmitError(true);
+                    setErrorMessage(response.data.response)
+                }
             })
             .catch(err => {
-                console.error('Error', err);
+                setErrorMessage(err.message);
                 setSubmitError(true);
-            });
+            })
     }
 
     return (

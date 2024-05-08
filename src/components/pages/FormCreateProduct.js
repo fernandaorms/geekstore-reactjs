@@ -8,14 +8,17 @@ import {FormCreateProductStep3} from '../../components/pages/FormCreateProductSt
 import {FormCreateProductStep4} from '../../components/pages/FormCreateProductStep4';
 import { validateForm, validateFormField, clearForm, getRequestBody } from '../../utils/forms/form-validade';
 
-export const FormCreateProduct = ({ successMessage, errorMessage }) => {
+export const FormCreateProduct = () => {
     const [formState, setFormState] = useState({});
     const [formErrors, setFormErrors] = useState({});
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [submitError, setSubmitError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const name = e.target.name;
+        const value = ((e.target.tagName === 'INPUT' && e.target.type === 'number') || e.target.tagName === 'SELECT') ? parseInt(e.target.value, 10) : e.target.value;
 
         setFormState(prevState => ({
             ...prevState,
@@ -26,22 +29,31 @@ export const FormCreateProduct = ({ successMessage, errorMessage }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        setErrorMessage('');
+        setSuccessMessage('');
         setSubmitSuccess(false);
         setSubmitError(false);
 
         const errors = validateForm(e.target, formState, formErrors, setFormErrors);
 
         if(errors) return;
-        
+
         const requestBody = getRequestBody(e.target, formState);
 
         return api.post('/product', requestBody)
             .then(response => {
-                setSubmitSuccess(true);
-                clearForm(e.target, setFormState);
+                if(response.data.status === 200) {
+                    setSubmitSuccess(true);
+                    setSuccessMessage(response.data.response)
+                    clearForm(e.target, setFormState);
+                }
+                else {
+                    setSubmitError(true);
+                    setErrorMessage(response.data.response)
+                }
             })
             .catch(err => {
-                console.error('Error', err);
+                setErrorMessage(err.message);
                 setSubmitError(true);
             });
     }
