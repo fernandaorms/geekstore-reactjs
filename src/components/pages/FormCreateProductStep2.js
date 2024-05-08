@@ -2,7 +2,7 @@ import { FormStep } from '../common/FormStep';
 import { FormLabel } from '../common/FormLabel';
 import { FormSpanError } from '../common/FormSpanError';
 
-export const FormCreateProductStep2 = ({ formState, handleChange, validateForm, formErrors }) => {
+export const FormCreateProductStep2 = ({ formState, handleChange, validateForm, formErrors, setFormErrors }) => {
     return(
         <FormStep title='Características' number='2'>
             <div className='col-lg-6'>
@@ -16,7 +16,7 @@ export const FormCreateProductStep2 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['size_weight'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name);}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors);}}
                 />
 
                 {formErrors['size_weight'] && (<FormSpanError errors={formErrors['size_weight']} />)}
@@ -33,7 +33,7 @@ export const FormCreateProductStep2 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['size_width'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name);}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors);}}
                 />
 
                 {formErrors['size_width'] && (<FormSpanError errors={formErrors['size_width']} />)}
@@ -50,7 +50,7 @@ export const FormCreateProductStep2 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['size_height'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name);}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors);}}
                 />
 
                 {formErrors['size_height'] && (<FormSpanError errors={formErrors['size_height']} />)}
@@ -67,7 +67,7 @@ export const FormCreateProductStep2 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['size_length'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name);}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors);}}
                 />
 
                 {formErrors['size_length'] && (<FormSpanError errors={formErrors['size_length']} />)}
@@ -84,7 +84,7 @@ export const FormCreateProductStep2 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['qty_items_per_box'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name);}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors);}}
                 />
 
                 {formErrors['qty_items_per_box'] && (<FormSpanError errors={formErrors['qty_items_per_box']} />)}
@@ -101,7 +101,7 @@ export const FormCreateProductStep2 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['ean'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name);}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors);}}
                 />
 
                 {formErrors['ean'] && (<FormSpanError errors={formErrors['ean']} />)}
@@ -117,7 +117,7 @@ export const FormCreateProductStep2 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['description'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name, 'textarea');}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors, 'textarea');}}
                 />
 
                 {formErrors['description'] && (<FormSpanError errors={formErrors['description']} />)}

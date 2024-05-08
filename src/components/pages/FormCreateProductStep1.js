@@ -2,7 +2,7 @@ import { FormStep } from '../common/FormStep';
 import { FormLabel } from '../common/FormLabel';
 import { FormSpanError } from '../common/FormSpanError';
 
-export const FormCreateProductStep1 = ({ formState, handleChange, validateForm, formErrors }) => {
+export const FormCreateProductStep1 = ({ formState, handleChange, validateForm, formErrors, setFormErrors }) => {
     return(
         <FormStep title='Dados Básicos' number='1'>
             <div className='col-lg-6'>
@@ -16,7 +16,7 @@ export const FormCreateProductStep1 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['name'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name);}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors);}}
                 />
 
                 {formErrors['name'] && (<FormSpanError errors={formErrors['name']} />)}
@@ -33,7 +33,7 @@ export const FormCreateProductStep1 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['sku'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name);}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors);}}
                 />
 
                 {formErrors['sku'] && (<FormSpanError errors={formErrors['sku']} />)}
@@ -50,7 +50,7 @@ export const FormCreateProductStep1 = ({ formState, handleChange, validateForm, 
                     placeholder=''
                     value={formState['price'] || ''} 
                     onChange={handleChange}
-                    onBlur={(e) => {validateForm(e.target.name);}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors);}}
                 />
 
                 {formErrors['price'] && (<FormSpanError errors={formErrors['price']} />)}
@@ -65,7 +65,7 @@ export const FormCreateProductStep1 = ({ formState, handleChange, validateForm, 
                     className='form-select'
                     onChange={handleChange}
                     value={formState['category'] || '0'}
-                    onBlur={(e) => {validateForm(e.target.name, 'select');}}
+                    onBlur={(e) => {validateForm(e.target.name, formState, setFormErrors, 'select');}}
                 >
                     <option value='0'>Sem Categoria</option>
                     <option value='1'>Categoria 1</option>

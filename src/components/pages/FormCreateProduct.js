@@ -1,15 +1,11 @@
-import { useState, useEffect } from 'react';
-
+import { useState} from 'react';
 import api from '../../services/api';
-
-import { validate } from '../../utils/forms/form-validade';
-
 import { FormResults } from '../common/FormResults';
-
 import {FormCreateProductStep1} from '../../components/pages/FormCreateProductStep1';
 import {FormCreateProductStep2} from '../../components/pages/FormCreateProductStep2';
 import {FormCreateProductStep3} from '../../components/pages/FormCreateProductStep3';
 import {FormCreateProductStep4} from '../../components/pages/FormCreateProductStep4';
+import { validateForm, validateFormField, clearForm, getRequestBody } from '../../utils/forms/form-validade';
 
 export const FormCreateProduct = ({ successMessage, errorMessage }) => {
     const [formState, setFormState] = useState({});
@@ -26,70 +22,22 @@ export const FormCreateProduct = ({ successMessage, errorMessage }) => {
         }));
     };
 
-    const validateFormField = (key, element='input') => {
-        const errors = validate(key, element, formState);
-
-        setFormErrors(prevState => ({
-            ...prevState,
-            [key]: errors[key]
-        }));
-    }
-
-    const clearForm = (form) => {
-        const fields = form.querySelectorAll('input, select, textarea');
-
-        fields.forEach((field) => {
-            setFormState(prevState => ({
-                ...prevState,
-                [field.name]: ''
-            }));
-        });
-    }
-
-    const validateForm = (form) => {
-        const inputs = form.querySelectorAll('input');
-        const selects = form.querySelectorAll('select');
-        const textareas = form.querySelectorAll('textarea');
-        
-        inputs.forEach((input) => validateFormField(input.name));
-        selects.forEach((select) => validateFormField(select.name, 'select'));
-        textareas.forEach((textarea) => validateFormField(textarea.name, 'textarea'));
-
-        if(Object.keys(formErrors).length === 0) return true;
-
-        for (const error of Object.values(formErrors)) {
-            if (error.length !== 0) return true;
-        }
-
-        return false;
-    }
-
-    const getRequestBody = (form) => {
-        const requestBody = {};
-
-        const fields = form.querySelectorAll('input, select, textarea');
-
-        fields.forEach((field) => { if (field.name) requestBody[field.name] = formState[field.name]; });
-
-        return requestBody;
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
         setSubmitSuccess(false);
         setSubmitError(false);
 
-        const errors = validateForm(e.target);
+        const errors = validateForm(e.target, formState, formErrors, setFormErrors);
 
         if(errors) return;
         
-        const requestBody = getRequestBody(e.target);
+        const requestBody = getRequestBody(e.target, formState);
 
         return api.post('/product', requestBody)
             .then(response => {
                 setSubmitSuccess(true);
-                clearForm(e.target);
+                clearForm(e.target, setFormState);
             })
             .catch(err => {
                 console.error('Error', err);
@@ -103,13 +51,13 @@ export const FormCreateProduct = ({ successMessage, errorMessage }) => {
 
             <form id='productRegister' onSubmit={(e) => handleSubmit(e)}>
                 <div className='row'>
-                    <FormCreateProductStep1 formState={formState} handleChange={handleChange} validateForm={validateFormField} formErrors={formErrors} />
+                    <FormCreateProductStep1 formState={formState} handleChange={handleChange} validateForm={validateFormField} formErrors={formErrors} setFormErrors={setFormErrors} />
 
-                    <FormCreateProductStep2 formState={formState} handleChange={handleChange} validateForm={validateFormField} formErrors={formErrors} />
+                    <FormCreateProductStep2 formState={formState} handleChange={handleChange} validateForm={validateFormField} formErrors={formErrors} setFormErrors={setFormErrors} />
 
-                    <FormCreateProductStep3 formState={formState} handleChange={handleChange} validateForm={validateFormField} formErrors={formErrors} />
+                    <FormCreateProductStep3 formState={formState} handleChange={handleChange} validateForm={validateFormField} formErrors={formErrors} setFormErrors={setFormErrors} />
 
-                    <FormCreateProductStep4 formState={formState} handleChange={handleChange} validateForm={validateFormField} formErrors={formErrors} />
+                    <FormCreateProductStep4 formState={formState} handleChange={handleChange} validateForm={validateFormField} formErrors={formErrors} setFormErrors={setFormErrors} />
                 </div>
 
                 <div className='buttons'>
